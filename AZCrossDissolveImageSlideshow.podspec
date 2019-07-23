@@ -15,7 +15,7 @@ Pod::Spec.new do |spec|
     Subclass of zvonicek/ImageSlideshow that supports fade transition between images.
   DESC
 
-  spec.homepage     = "https://github.com/ApolloZhu/AZCrossDissolveImageSlideshow"
+  spec.homepage     = "https://github.com/XiangWuShuo/AZCrossDissolveImageSlideshow"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
   spec.license      = { :type => "MIT", :file => "LICENSE" }
@@ -27,7 +27,7 @@ Pod::Spec.new do |spec|
   spec.platform       = :ios, '8.0'
 
 
-  spec.source = { :git => "https://github.com/ApolloZhu/AZCrossDissolveImageSlideshow.git", :tag => "#{spec.version}" }
+  spec.source = { :git => "https://github.com/XiangWuShuo/AZCrossDissolveImageSlideshow.git", :tag => "#{spec.version}" }
   spec.source_files = "AZCrossDissolveImageSlideshow"
   # spec.exclude_files = "Classes/Exclude"
 

@@ -22,5 +22,5 @@ imageSlideshow.configurePreviewImageView = { imageView in
 ## Install
 
 ```ruby
-pod 'AZCrossDissolveImageSlideshow', :git => 'https://github.com/ApolloZhu/AZCrossDissolveImageSlideshow.git'
+pod 'AZCrossDissolveImageSlideshow', :git => 'https://github.com/XiangWuShuo/AZCrossDissolveImageSlideshow.git'
 ```

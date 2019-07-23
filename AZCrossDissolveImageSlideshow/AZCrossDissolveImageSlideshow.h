@@ -3,7 +3,10 @@
 //  AZCrossDissolveImageSlideshow
 //
 //  Created by ApolloZhu on 2019/7/23.
-//  Copyright © 2019 XiangWuShuo. All rights reserved.
+//
+//  Copyright (c) 2019 Zhiyu Zhu/朱智语/ApolloZhu
+//  Copyright (c) 2019 XiangWuShuo
+//  MIT License.
 //
 
 #import <Foundation/Foundation.h>
