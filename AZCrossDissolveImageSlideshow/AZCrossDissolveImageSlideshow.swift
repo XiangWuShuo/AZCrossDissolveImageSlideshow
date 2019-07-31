@@ -33,13 +33,14 @@ open class AZCrossDissolveImageSlideshow: ImageSlideshow {
         if !circular && currentPage == images.count - 1 {
             return
         }
+        
+        defer { restartTimer() }
+        if indicesDidInvalidate { return }
         let nextPage = (currentPage + 1) % images.count
         
         let snapshot = imageView(for: images[nextPage])
-        
         addSnapshot(snapshot)
         crossFade(from: currentPage, to: nextPage, using: snapshot)
-        restartTimer()
     }
     
     private func imageView(for image: InputSource) -> UIImageView {
@@ -66,13 +67,19 @@ open class AZCrossDissolveImageSlideshow: ImageSlideshow {
         UIView.animate(
             withDuration: crossFadeDuration,
             animations: { [weak self] in
-                self?.slideshowItems[currentPage].imageView.alpha = 0
+                guard let self = self, !self.indicesDidInvalidate else { return }
+                self.slideshowItems[currentPage].imageView.alpha = 0
                 snapshot.alpha = 1
             },
             completion: { [weak self] _ in
-                self?.setCurrentPage(nextPage, animated: false)
-                self?.slideshowItems[currentPage].imageView.alpha = 1
-                snapshot.removeFromSuperview()
+                defer { snapshot.removeFromSuperview() }
+                guard let self = self else { return }
+                if !self.indicesDidInvalidate {
+                    self.setCurrentPage(nextPage, animated: false)
+                }
+                if self.slideshowItems.indices.contains(currentPage) {
+                    self.slideshowItems[currentPage].imageView.alpha = 1
+                }
             }
         )
     }
@@ -106,12 +113,16 @@ open class AZCrossDissolveImageSlideshow: ImageSlideshow {
         if slideshowTimer != nil {
             pauseTimer()
         }
+        indicesDidInvalidate = false
         setTimerIfNeeded()
     }
     
     // MARK: - Inject into Life Cycle
     
+    private var indicesDidInvalidate = false
+    
     open override func setImageInputs(_ inputs: [InputSource]) {
+        indicesDidInvalidate = true
         super.setImageInputs(inputs)
         setTimerIfNeeded()
     }
